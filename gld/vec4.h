@@ -22,7 +22,7 @@ namespace gld {
 			void translate(vec2 vec);
 			void scale(vec3 vec);
 			void scale(vec2 vec);
-			void rotate(vec3 vec, int degrees);
+			void rotate(vec2 pivot, float delta);
 			void rotate(vec2 vec);
 	};
 }

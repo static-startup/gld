@@ -1,6 +1,7 @@
 # include "vec4.h"
 
 # include <cmath>
+# include <iostream>
 
 namespace gld {
 	vec4::vec4() {
@@ -18,10 +19,15 @@ namespace gld {
 	}
 
 	void vec4::multiply(mat4 mat) {
-		x = mat.m0 * x + mat.m1 * y + mat.m2 * z + mat.m3 * w;
-		y = mat.m4 * x + mat.m5 * y + mat.m6 * z + mat.m7 * w;
-		z = mat.m8 * x + mat.m9 * y + mat.m10 * z + mat.m11 * w;
-		w = mat.m12 * x + mat.m13 * y + mat.m14 * z + mat.m15 * w;
+		float t_x, t_y, t_z, t_w;
+		t_x = mat.m0 * x + mat.m1 * y + mat.m2 * z + mat.m3 * w;
+		t_y = mat.m4 * x + mat.m5 * y + mat.m6 * z + mat.m7 * w;
+		t_z = mat.m8 * x + mat.m9 * y + mat.m10 * z + mat.m11 * w;
+		t_w = mat.m12 * x + mat.m13 * y + mat.m14 * z + mat.m15 * w;
+		x = t_x;
+		y = t_y;
+		z = t_x;
+		w = t_w;
 	}
 
 	void vec4::translate(vec3 vec) {
@@ -56,10 +62,10 @@ namespace gld {
 		multiply(mat4(scaling_matrix));
 	}
 
-	void vec4::rotate(vec3 vec, int degrees) {
-		float rotation_matrix[16] = {1.0f, 0.0f, 0.0f, 0.0f,
-									 0.0f, static_cast<float>(cos(degrees)), static_cast<float>(-sin(degrees)), 0.0f,
-									 0.0f, static_cast<float>(sin(degrees)), static_cast<float>(cos(degrees)), 0.0f,
+	void vec4::rotate(vec2 pivot, float delta) {
+		float rotation_matrix[16] = {static_cast<float>(cos(delta)), static_cast<float>(-sin(delta)), 0.0f, 0.0f,
+									 static_cast<float>(sin(delta)), static_cast<float>(cos(delta)), 0.0f, 0.0f,
+									 0.0f, 0.0f, 1.0f, 0.0f,
 									 0.0f, 0.0f, 0.0f, 1.0f};
 		multiply(mat4(rotation_matrix));
 	}

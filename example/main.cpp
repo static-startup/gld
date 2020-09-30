@@ -18,6 +18,7 @@ int main() {
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	GLFWwindow *window = glfwCreateWindow(640, 640, "title", NULL, NULL);
@@ -58,9 +59,12 @@ int main() {
 		float speed = 0.05f;
 
 		// moving object
-		v1.translate(gld::vec3(speed, 0.0f, 0.0f));
-		v2.translate(gld::vec3(speed, 0.0f, 0.0f));
-		v3.translate(gld::vec3(speed, 0.0f, 0.0f));
+		//v1.translate(gld::vec3(speed, 0.0f, 0.0f));
+		//v2.translate(gld::vec3(speed, 0.0f, 0.0f));
+		//v3.translate(gld::vec3(speed, 0.0f, 0.0f));
+		v1.rotate(gld::vec2(0.0f, 0.0f), speed);
+		v2.rotate(gld::vec2(0.0f, 0.0f), speed);
+		v3.rotate(gld::vec2(0.0f, 0.0f), speed);
 
 		// define vertices
 		GLfloat vertices[] = {
@@ -68,6 +72,8 @@ int main() {
 			v2.x, v2.y, v2.z,
 			v3.x, v3.y, v3.z,
 		};
+
+		//std::cout << vertices[0] << " " << v1.x << std::endl;
 
 		// buffer data 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
