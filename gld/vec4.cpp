@@ -1,5 +1,7 @@
 # include "vec4.h"
 
+# include <cmath>
+
 namespace gld {
 	vec4::vec4() {
 		x = 0.0f;
@@ -36,5 +38,33 @@ namespace gld {
 										0.0f, 0.0f, 1.0f, 0.0f,
 										0.0f, 0.0f, 0.0f, 1.0f};
 		multiply(mat4(translation_matrix));
+	}
+
+	void vec4::scale(vec3 vec) {
+		float scaling_matrix[16] = {vec.x, 0.0f, 0.0f, 0.0f,
+									0.0f, vec.y, 0.0f, 0.0f,
+									0.0f, 0.0f, vec.z, 0.0f,
+									0.0f, 0.0f, 0.0f, 1.0f};
+		multiply(mat4(scaling_matrix));
+	}
+
+	void vec4::scale(vec2 vec) {
+		float scaling_matrix[16] = {vec.x, 0.0f, 0.0f, 0.0f,
+									0.0f, vec.y, 0.0f, 0.0f,
+									0.0f, 0.0f, 1.0f, 0.0f,
+									0.0f, 0.0f, 0.0f, 1.0f};
+		multiply(mat4(scaling_matrix));
+	}
+
+	void vec4::rotate(vec3 vec, int degrees) {
+		float rotation_matrix[16] = {1.0f, 0.0f, 0.0f, 0.0f,
+									 0.0f, static_cast<float>(cos(degrees)), static_cast<float>(-sin(degrees)), 0.0f,
+									 0.0f, static_cast<float>(sin(degrees)), static_cast<float>(cos(degrees)), 0.0f,
+									 0.0f, 0.0f, 0.0f, 1.0f};
+		multiply(mat4(rotation_matrix));
+	}
+
+	void vec4::rotate(vec2 vec) {
+
 	}
 }

@@ -20,6 +20,10 @@ namespace gld {
 			void multiply(mat4 mat);
 			void translate(vec3 vec);
 			void translate(vec2 vec);
+			void scale(vec3 vec);
+			void scale(vec2 vec);
+			void rotate(vec3 vec, int degrees);
+			void rotate(vec2 vec);
 	};
 }
 
